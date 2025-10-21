@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Expiring Soon{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Expiring in {{ days }} Days</h1>
+    <form method="get" style="display:flex;gap:8px;align-items:center;">
+      <input name="days" type="number" min="1" value="{{ days }}" style="padding:10px 12px;background:#334155;border:1px solid #475569;border-radius:8px;color:#fff;width:120px;">
+      <button class="btn-primary" type="submit">Update</button>
+    </form>
+  </div>
+
+  <div class="content-box">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Brand</th>
+          <th>Purchase Date</th>
+          <th>Expiry Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.product_name }}</td>
+          <td>{{ item.brand or 'N/A' }}</td>
+          <td>{{ item.purchase_date }}</td>
+          <td>{{ item.expiry_date }}</td>
+          <td><span class="status-badge status-{{ item.status|lower }}">{{ item.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="empty-state">No warranties expiring in the selected window.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

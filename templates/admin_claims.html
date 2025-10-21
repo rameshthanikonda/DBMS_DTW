@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Admin Claims{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Manage Claims</h1>
+    <form method="get" action="{{ url_for('admin_claims') }}" style="display:flex;gap:8px;align-items:center;">
+      <select name="status" class="input-select" style="padding:8px 12px;background-color:#334155;border:1px solid #475569;border-radius:8px;color:#fff;">
+        <option value="" {% if not current_status %}selected{% endif %}>All</option>
+        <option value="Pending" {% if current_status=='Pending' %}selected{% endif %}>Pending</option>
+        <option value="In Progress" {% if current_status=='In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Completed" {% if current_status=='Completed' %}selected{% endif %}>Completed</option>
+        <option value="Denied" {% if current_status=='Denied' %}selected{% endif %}>Denied</option>
+      </select>
+      <button class="btn-primary" type="submit">Filter</button>
+    </form>
+  </div>
+
+  <div class="content-box">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Product</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for c in claims %}
+        <tr>
+          <td>{{ c.claim_id }}</td>
+          <td>{{ c.user_name }}</td>
+          <td>{{ c.product_name }}</td>
+          <td>{{ c.claim_date }}</td>
+          <td>{{ c.description }}</td>
+          <td>{{ c.status }}</td>
+          <td>
+            <form method="post" action="{{ url_for('admin_update_claim_status', claim_id=c.claim_id) }}" style="display:flex;gap:8px;">
+              <select name="status" style="padding:6px 8px;background-color:#334155;border:1px solid #475569;border-radius:8px;color:#fff;">
+                <option {% if c.status=='Pending' %}selected{% endif %}>Pending</option>
+                <option {% if c.status=='In Progress' %}selected{% endif %}>In Progress</option>
+                <option {% if c.status=='Completed' %}selected{% endif %}>Completed</option>
+                <option {% if c.status=='Denied' %}selected{% endif %}>Denied</option>
+              </select>
+              <button class="btn-primary" type="submit">Update</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="7" class="empty-state">No claims found.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

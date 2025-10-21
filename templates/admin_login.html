@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <div class="left-pane">
+        <div class="brand-info">
+            <div class="logo"><i class="fa-solid fa-shield-halved"></i><h1>Warracker Admin</h1></div>
+            <p class="tagline">Administrator access for managing users, products, and claims.</p>
+        </div>
+    </div>
+    <div class="right-pane">
+        <form class="auth-form" method="POST" action="{{ url_for('admin_login') }}">
+            <h2>Admin Login</h2>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" required>
+                    <i class="fa-regular fa-eye toggle-password"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn-auth"><i class="fa-solid fa-user-shield"></i> Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

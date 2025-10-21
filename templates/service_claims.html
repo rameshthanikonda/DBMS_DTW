@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Service Claims{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Service Claims</h1>
+  </div>
+
+  <div class="two-col">
+    <div class="form-container">
+      <h2 class="form-title">Submit a Claim</h2>
+      <form class="general-form" method="POST">
+        <div class="input-group">
+          <label for="warranty_id">Warranty</label>
+          <select id="warranty_id" name="warranty_id" required style="width:100%; padding: 12px 15px; background-color:#334155; border:1px solid #475569; border-radius:8px; color:#fff;">
+            {% for w in warranties %}
+            <option value="{{ w.id }}">{{ w.product_name }}</option>
+            {% else %}
+            <option disabled>No warranties available</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="description">Issue Description</label>
+          <textarea id="description" name="description" rows="4" required style="width:100%; padding:12px 15px; background-color:#334155; border:1px solid #475569; border-radius:8px; color:#fff;"></textarea>
+        </div>
+        <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Claim</button>
+      </form>
+    </div>
+
+    <div class="content-box">
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Product</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in claims %}
+            <tr>
+              <td>{{ c.claim_id }}</td>
+              <td>{{ c.product_name }}</td>
+              <td>{{ c.claim_date }}</td>
+              <td>{{ c.description }}</td>
+              <td><span class="status-badge">{{ c.status }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="empty-state">No claims submitted yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Warracker{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% if session.user_id %}
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">
+                <i class="fa-solid fa-shield-halved"></i> Warracker
+            </a>
+            <nav class="nav-links">
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('my_warranties') }}">My Warranties</a>
+                <a href="{{ url_for('add_warranty') }}">Add Warranty</a>
+                <a href="{{ url_for('claims') }}">Claims</a>
+                <a href="{{ url_for('expiring') }}">Expiring</a>
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('change_password') }}">Change Password</a>
+                {% if session.get('admin_id') %}
+                <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+                {% endif %}
+                <a id="notification-icon" href="#" class="notification-icon"><i class="fa-solid fa-bell"></i>
+                    {% if unread_count and unread_count > 0 %}<span class="notification-badge"></span>{% endif %}
+                </a>
+            </nav>
+        </div>
+        <div id="notification-panel" class="notification-panel" style="display:none;"></div>
+    </header>
+    {% endif %}
+
+    <main class="{% if not session.user_id %}auth-page-wrapper{% else %}page-wrapper{% endif %}">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

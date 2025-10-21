@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<div class="page-container">
+    <div class="form-container profile-card">
+        <h2 class="form-title">My Profile</h2>
+        <div class="profile-info">
+            <strong>Full Name:</strong>
+            <span>{{ user.name }}</span>
+        </div>
+        <div class="profile-info">
+            <strong>Email:</strong>
+            <span>{{ user.email }}</span>
+        </div>
+        <a href="{{ url_for('logout') }}" class="btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </div>
+</div>
+{% endblock %}

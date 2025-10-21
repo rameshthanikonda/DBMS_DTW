@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}My Warranties{% endblock %}
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h1>My Warranties</h1>
+        <div style="display:flex;gap:8px;align-items:center;">
+            <a href="{{ url_for('export_my_warranties') }}" class="btn-primary"><i class="fa-solid fa-file-csv"></i> Export CSV</a>
+            <a href="{{ url_for('add_warranty') }}" class="btn-primary"><i class="fa-solid fa-plus"></i> Add Warranty</a>
+            <form action="{{ url_for('dedupe_my_warranties') }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn-secondary"><i class="fa-solid fa-broom"></i> Remove Duplicates</button>
+            </form>
+        </div>
+    </div>
+    <div class="content-box">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Brand</th>
+                    <th>Purchase Date</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                    <th>Invoice</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in warranties %}
+                <tr>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.brand or 'N/A' }}</td>
+                    <td>{{ item.purchase_date }}</td>
+                    <td>{{ item.expiry_date }}</td>
+                    <td><span class="status-badge status-{{ item.status|lower }}">{{ item.status }}</span></td>
+                    <td>
+                        {% if item.invoice_path %}
+                        <a href="{{ url_for('uploaded_file', filename=item.invoice_path) }}" target="_blank" class="link">View</a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn-secondary" href="{{ url_for('edit_warranty', warranty_id=item.id) }}"><i class="fa-solid fa-pen"></i> Edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="empty-state">You have no warranties yet. Click "Add Warranty" to get started!</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

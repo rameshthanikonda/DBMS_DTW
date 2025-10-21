@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Warranty Details{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Warranty Details</h1>
+  </div>
+
+  <div class="form-container">
+    <h2 class="form-title">{{ warranty.product_name }}</h2>
+    <div class="profile-info"><strong>Brand:</strong><span>{{ warranty.brand or 'N/A' }}</span></div>
+    <div class="profile-info"><strong>Purchase Date:</strong><span>{{ warranty.purchase_date }}</span></div>
+    <div class="profile-info"><strong>Expiry Date:</strong><span>{{ warranty.expiry_date }}</span></div>
+    <div class="profile-info"><strong>Status:</strong><span>{{ warranty.status }}</span></div>
+    <div class="profile-info"><strong>Invoice:</strong>
+      <span>
+        {% if warranty.invoice_path %}
+        <a class="link" target="_blank" href="{{ url_for('uploaded_file', filename=warranty.invoice_path) }}">View</a>
+        {% else %}-{% endif %}
+      </span>
+    </div>
+  </div>
+
+  <div class="content-box" style="margin-top:20px;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Claim ID</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in claims %}
+        <tr>
+          <td>{{ c.claim_id }}</td>
+          <td>{{ c.claim_date }}</td>
+          <td>{{ c.description }}</td>
+          <td>{{ c.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="empty-state">No claims for this warranty.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

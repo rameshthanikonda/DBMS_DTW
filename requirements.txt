@@ -1,0 +1,4 @@
+Flask
+cx_Oracle
+python-dotenv
+python-dateutil

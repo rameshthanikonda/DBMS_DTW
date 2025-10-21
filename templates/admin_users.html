@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Admin Users{% endblock %}
+{% block content %}
+<div class="page-container admin-wide">
+  <div class="page-header">
+    <h1>Users</h1>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn-primary">Back to Dashboard</a>
+  </div>
+  <div class="content-box">
+    <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.user_id }}</td>
+          <td>{{ u.full_name }}</td>
+          <td>{{ u.email }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="empty-state">No users found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

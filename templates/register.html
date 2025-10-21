@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Register | Warracker{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <div class="left-pane">
+        <div class="brand-info">
+            <div class="logo"><i class="fa-solid fa-shield-halved"></i><h1>Warracker</h1></div>
+            <p class="tagline">Secure and easy warranty management for everyone.</p>
+            <ul class="features">
+                <li><i class="fa-solid fa-lock"></i> Safe & Secure</li>
+                <li><i class="fa-solid fa-clock"></i> Quick Registration</li>
+            </ul>
+        </div>
+    </div>
+    <div class="right-pane">
+        <form class="auth-form" method="POST" action="{{ url_for('register') }}">
+            <h2>Create Your Account</h2>
+            <div class="input-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" required>
+                    <i class="fa-regular fa-eye toggle-password"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn-auth"><i class="fa-solid fa-user-plus"></i> Register</button>
+            <p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+        </form>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

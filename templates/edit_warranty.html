@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Edit Warranty{% endblock %}
+{% block content %}
+<div class="page-container">
+    <div class="form-container">
+        <h2 class="form-title">Edit Warranty</h2>
+        <form class="general-form" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="product_name">Product Name</label>
+                <input type="text" id="product_name" name="product_name" value="{{ item.product_name }}" required>
+            </div>
+            <div class="input-group">
+                <label for="brand">Brand (Optional)</label>
+                <input type="text" id="brand" name="brand" value="{{ item.brand }}">
+            </div>
+            <div class="input-group">
+                <label for="purchase_date">Purchase Date</label>
+                <input type="date" id="purchase_date" name="purchase_date" value="{{ item.purchase_date }}" required>
+            </div>
+            <div class="input-group">
+                <label>Warranty Period</label>
+                <div class="period-group">
+                    <input type="number" id="period_value" name="period_value" min="1" value="{{ item.warranty_period_months }}" required>
+                    <select id="period_unit" name="period_unit">
+                        <option value="months" selected>Months</option>
+                        <option value="years">Years</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="invoice_file">Replace Invoice (PDF, PNG, JPG)</label>
+                <input type="file" id="invoice_file" name="invoice_file" class="file-input" accept=".pdf,.png,.jpg,.jpeg">
+                {% if item.invoice_path %}
+                <div style="margin-top:8px;">
+                    Current: <a href="{{ url_for('uploaded_file', filename=item.invoice_path) }}" target="_blank" class="link">View</a>
+                </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn-primary"><i class="fa-solid fa-save"></i> Update Warranty</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

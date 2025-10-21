@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('admin_logout') }}" class="btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <div class="content-box">
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Users</div>
+        <div class="kpi-value">{{ stats.users }}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Warranties</div>
+        <div class="kpi-value">{{ stats.warranties }}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Expiring in 30 days</div>
+        <div class="kpi-value">{{ stats.expiring_soon }}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Pending Claims</div>
+        <div class="kpi-value">{{ stats.pending_claims }}</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;justify-content:center;">
+      <a class="btn-primary" href="{{ url_for('admin_claims') }}"><i class="fa-solid fa-list-check"></i> Manage Claims</a>
+      <a class="btn-primary" href="{{ url_for('admin_products') }}"><i class="fa-solid fa-box"></i> Manage Products</a>
+      <a class="btn-primary" href="{{ url_for('admin_users') }}"><i class="fa-solid fa-users"></i> View Users</a>
+      <a class="btn-primary" href="{{ url_for('admin_reports') }}"><i class="fa-solid fa-chart-column"></i> Reports</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

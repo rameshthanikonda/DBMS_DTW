@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Add Warranty{% endblock %}
+{% block content %}
+<div class="page-container compact-top">
+    <div class="page-header">
+        <h1>Add Warranty</h1>
+    </div>
+    <div class="form-container">
+        <h2 class="form-title">Add a New Warranty</h2>
+        <form class="general-form" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="product_name">Product Name</label>
+                <input type="text" id="product_name" name="product_name" required>
+            </div>
+            <div class="input-group">
+                <label for="brand">Brand (Optional)</label>
+                <input type="text" id="brand" name="brand">
+            </div>
+            <div class="input-group">
+                <label for="purchase_date">Purchase Date</label>
+                <input type="date" id="purchase_date" name="purchase_date" required>
+            </div>
+            <div class="input-group">
+                <label>Warranty Period</label>
+                <div class="period-group">
+                    <input type="number" id="period_value" name="period_value" min="1" required>
+                    <select id="period_unit" name="period_unit">
+                        <option value="years">Years</option>
+                        <option value="months">Months</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="invoice_file">Upload Invoice (PDF, PNG, JPG)</label>
+                <input type="file" id="invoice_file" name="invoice_file" class="file-input" accept=".pdf,.png,.jpg,.jpeg">
+            </div>
+            <button type="submit" class="btn-primary"><i class="fa-solid fa-save"></i> Save Warranty</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

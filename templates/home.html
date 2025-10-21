@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Home | Warracker{% endblock %}
+{% block content %}
+<div class="page-container dashboard-page">
+
+    <section class="dashboard-section">
+        <div class="section-header">
+            <h2>Recently Added</h2>
+            <a href="{{ url_for('my_warranties') }}" class="view-all-link">View All</a>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/laptop.jpg') }}" alt="Laptop" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3>MacBook Pro 16" with M3 Max Chip</h3>
+                    <p>Added on Oct 18, 2025</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/phone.jpg') }}" alt="Smartphone" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3>iPhone 17 Pro</h3>
+                    <p>Added on Oct 15, 2025</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/tv.jpg') }}" alt="Television" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3>Samsung 65" QLED 4K TV</h3>
+                    <p>Added on Oct 12, 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="section-header">
+            <h2>Expiring Soon</h2>
+            <a href="{{ url_for('my_warranties') }}" class="view-all-link">View All</a>
+        </div>
+        <div class="expiring-list">
+            <a href="#" class="expiring-item">
+                <div class="item-icon-wrapper">
+                    <img src="{{ url_for('static', filename='images/watch.jpg') }}" alt="Smartwatch" class="item-icon">
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Apple Watch Ultra</span>
+                    <span class="item-expiry">Expires on Nov 25, 2025</span>
+                </div>
+                <i class="fa-solid fa-chevron-right item-arrow"></i>
+            </a>
+            <a href="#" class="expiring-item">
+                <div class="item-icon-wrapper">
+                    <img src="{{ url_for('static', filename='images/phone.jpg') }}" alt="Smartphone" class="item-icon">
+                </div>
+                <div class="item-details">
+                    <span class="item-name">iPhone 17 Pro</span>
+                    <span class="item-expiry">Expires on Dec 10, 2025</span>
+                </div>
+                <i class="fa-solid fa-chevron-right item-arrow"></i>
+            </a>
+        </div>
+    </section>
+</div>
+{% endblock %}

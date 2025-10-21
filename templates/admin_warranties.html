@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Admin Warranties{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>All Warranties</h1>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <form method="get" style="display:flex;gap:8px;">
+        <input type="text" name="q" value="{{ q or '' }}" placeholder="Search product/brand/user" style="padding:10px 12px;background:#334155;border:1px solid #475569;border-radius:8px;color:#fff;">
+        <select name="status" style="padding:10px 12px;background:#334155;border:1px solid #475569;border-radius:8px;color:#fff;">
+          <option value="" {% if not current_status %}selected{% endif %}>All</option>
+          <option value="Active" {% if current_status=='Active' %}selected{% endif %}>Active</option>
+          <option value="Expired" {% if current_status=='Expired' %}selected{% endif %}>Expired</option>
+        </select>
+        <button class="btn-primary" type="submit">Filter</button>
+      </form>
+      <a class="btn-primary" href="{{ url_for('admin_export_warranties') }}">Export CSV</a>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Product</th>
+          <th>Brand</th>
+          <th>Purchase Date</th>
+          <th>Expiry Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for w in warranties %}
+        <tr>
+          <td>{{ w.warranty_id }}</td>
+          <td>{{ w.user_name }}</td>
+          <td>{{ w.product_name }}</td>
+          <td>{{ w.brand or '-' }}</td>
+          <td>{{ w.purchase_date }}</td>
+          <td>{{ w.expiry_date }}</td>
+          <td><span class="status-badge status-{{ w.status|lower }}">{{ w.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="empty-state">No warranties found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

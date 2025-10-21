@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Admin Reports{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Reports</h1>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <a href="{{ url_for('admin_export_warranties') }}" class="btn-primary"><i class="fa-solid fa-file-csv"></i> Export Warranties</a>
+      <a href="{{ url_for('admin_export_claims') }}" class="btn-primary"><i class="fa-solid fa-file-csv"></i> Export Claims</a>
+      <a href="{{ url_for('admin_export_products') }}" class="btn-primary"><i class="fa-solid fa-file-csv"></i> Export Products</a>
+      <a href="{{ url_for('admin_dashboard') }}" class="btn-primary">Back to Dashboard</a>
+    </div>
+  </div>
+
+  <div class="content-box" style="padding:20px;">
+    <h2 class="form-title">Expired Warranties</h2>
+    <table class="data-table" style="margin-top:10px;">
+      <thead>
+        <tr><th>Product</th><th>User</th><th>Expiry Date</th></tr>
+      </thead>
+      <tbody>
+        {% for r in expired %}
+        <tr><td>{{ r.product_name }}</td><td>{{ r.user_name }}</td><td>{{ r.expiry_date }}</td></tr>
+        {% else %}
+        <tr><td colspan="3" class="empty-state">No expired warranties.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2 class="form-title" style="margin-top:30px;">Expiring in 30 Days</h2>
+    <table class="data-table" style="margin-top:10px;">
+      <thead>
+        <tr><th>Product</th><th>User</th><th>Expiry Date</th></tr>
+      </thead>
+      <tbody>
+        {% for r in upcoming %}
+        <tr><td>{{ r.product_name }}</td><td>{{ r.user_name }}</td><td>{{ r.expiry_date }}</td></tr>
+        {% else %}
+        <tr><td colspan="3" class="empty-state">No upcoming expirations.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2 class="form-title" style="margin-top:30px;">Claims Summary</h2>
+    <table class="data-table" style="margin-top:10px;">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Product</th>
+          <th>Total</th>
+          <th>Pending</th>
+          <th>In Progress</th>
+          <th>Completed</th>
+          <th>Denied</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in claims_summary %}
+        <tr>
+          <td>{{ s.user_name }}</td>
+          <td>{{ s.product_name }}</td>
+          <td>{{ s.total_claims }}</td>
+          <td>{{ s.pending_claims }}</td>
+          <td>{{ s.in_progress_claims }}</td>
+          <td>{{ s.completed_claims }}</td>
+          <td>{{ s.denied_claims }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="empty-state">No claims summary available.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
