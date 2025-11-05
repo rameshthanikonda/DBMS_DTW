@@ -70,6 +70,71 @@ Warracker is a Flask-based web application that helps users track product warran
 
 On first start, the app will create an `uploads/` folder if missing and start a background scheduler that sends daily warranty reminders.
 
+## Localhost URLs
+- **App (Home):** `http://127.0.0.1:5000/`
+- **Login:** `http://127.0.0.1:5000/login`
+- **Register:** `http://127.0.0.1:5000/register`
+- **My Warranties:** `http://127.0.0.1:5000/my-warranties`
+- **Claims:** `http://127.0.0.1:5000/claims`
+- **Expiring:** `http://127.0.0.1:5000/expiring?days=30`
+- **Profile:** `http://127.0.0.1:5000/profile`
+- **Notifications API:**
+  - `http://127.0.0.1:5000/get_notifications`
+  - `http://127.0.0.1:5000/mark_notifications_read`
+- **Admin:**
+  - `http://127.0.0.1:5000/admin/login`
+  - `http://127.0.0.1:5000/admin/dashboard`
+  - `http://127.0.0.1:5000/admin/warranties`
+  - `http://127.0.0.1:5000/admin/claims`
+  - `http://127.0.0.1:5000/admin/products`
+  - `http://127.0.0.1:5000/admin/users`
+  - `http://127.0.0.1:5000/admin/reports`
+  - Seed default admin (temporary): `http://127.0.0.1:5000/admin/seed?token=<SECRET_KEY>`
+
+## Theme (Local Colors)
+These are the current theme variables from `static/css/style.css` (`:root`), used across the app.
+
+- **Background (`--bg`):** `#0b1220`
+- **Panel (`--panel`):** `#101827`
+- **Panel 2 (`--panel-2`):** `#0f172a`
+- **Border (`--border`):** `#1f2a44`
+- **Text (`--text`):** `#e5e7eb`
+- **Muted (`--muted`):** `#9aa7bd`
+- **Primary (`--primary`):** `#6366f1`
+- **Primary 600 (`--primary-600`):** `#5458e8`
+- **Primary 700 (`--primary-700`):** `#4f46e5`
+- **Accent (`--accent`):** `#22d3ee`
+- **Success (`--success`):** `#10b981`
+- **Danger (`--danger`):** `#ef4444`
+- **Warning (`--warning`):** `#f59e0b`
+
+Common component colors you’ll also see in the UI:
+
+- **Buttons (primary gradient):** `linear-gradient(135deg, #6366f1, #22d3ee)`
+- **Input focus ring:** `rgba(34,211,238,0.18)`
+- **Table header:** `#141d30`
+
+To change the theme, edit the variables under `:root` in `static/css/style.css`.
+
+## Screenshots
+Add screenshots in this section after running locally. Suggested shots:
+
+- **Login / Register**
+- **Dashboard (Home)**
+- **My Warranties (table)**
+- **Create/Edit Warranty (form)**
+- **Claims**
+- **Expiring**
+- **Profile**
+- **Admin Dashboard and Lists**
+
+Place images in a folder like `docs/screenshots/` and reference them here, for example:
+
+```markdown
+![Login](docs/screenshots/login.png)
+![Dashboard](docs/screenshots/dashboard.png)
+```
+
 ## Database Notes
 The app expects the following tables (names inferred from the code):
 - `users`
