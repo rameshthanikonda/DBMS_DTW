@@ -128,13 +128,13 @@ Add screenshots in this section after running locally. Suggested shots:
 - **Profile**
 - **Admin Dashboard and Lists**
 
-Place images in a folder like `docs/screenshots/` and reference them here, for example:
+Place images in a folder like `screenshots/` and reference them here, for example:
 
-```markdown
+
 ![Login](screenshots/user_login.png)
 ![Dashboard](screenshots/admin_dashboard.png)
-[Dashboard](screenshots/mywarranties.png)
-```
+![Dashboard](screenshots/mywarranties.png)
+
 
 ## Database Notes
 The app expects the following tables (names inferred from the code):
