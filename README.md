@@ -131,8 +131,9 @@ Add screenshots in this section after running locally. Suggested shots:
 Place images in a folder like `docs/screenshots/` and reference them here, for example:
 
 ```markdown
-![Login](docs/screenshots/login.png)
-![Dashboard](docs/screenshots/dashboard.png)
+![Login](screenshots/user_login.png)
+![Dashboard](screenshots/admin_dashboard.png)
+[Dashboard](screenshots/mywarranties.png)
 ```
 
 ## Database Notes
