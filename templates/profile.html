@@ -1,18 +1,29 @@
 {% extends "base.html" %}
 {% block title %}My Profile{% endblock %}
 {% block content %}
-<div class="page-container">
-    <div class="form-container profile-card">
-        <h2 class="form-title">My Profile</h2>
-        <div class="profile-info">
-            <strong>Full Name:</strong>
-            <span>{{ user.name }}</span>
+<div class="page-container profile-wrapper">
+    <div class="form-container profile-card profile-grid">
+        <div class="profile-left">
+            <h2 class="form-title">My Profile</h2>
+            <div class="profile-info" style="gap:12px; align-items: center;">
+                <strong>Full Name:</strong>
+                <span id="editable-name" contenteditable="false" role="textbox" aria-label="Edit full name" spellcheck="false">{{ user.name }}</span>
+                <div class="profile-name-actions" style="margin-left:auto; display:flex; gap:8px;">
+                    <button id="edit-name-btn" type="button" class="btn-secondary btn-sm">Edit</button>
+                    <button id="save-name-btn" type="button" class="btn-primary btn-sm" style="display:none;">Save</button>
+                </div>
+            </div>
+            <div class="profile-info">
+                <strong>Email:</strong>
+                <span>{{ user.email }}</span>
+            </div>
+            <div class="profile-actions">
+                <a href="{{ url_for('logout') }}" class="btn-danger btn-danger-sm"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
         </div>
-        <div class="profile-info">
-            <strong>Email:</strong>
-            <span>{{ user.email }}</span>
+        <div class="profile-right">
+            <a href="{{ url_for('change_password') }}" class="btn-secondary profile-cp-toggle">Change Password</a>
         </div>
-        <a href="{{ url_for('logout') }}" class="btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
     </div>
 </div>
 {% endblock %}

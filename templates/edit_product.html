@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Edit Product{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Edit Product</h1>
+    <a href="{{ url_for('admin_products') }}" class="btn-secondary btn-sm"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  </div>
+
+  <div class="form-container">
+    <h2 class="form-title">{{ product.brand }} — {{ product.model_name }}</h2>
+    <div class="profile-info"><strong>Brand:</strong><span>{{ product.brand }}</span></div>
+    <div class="profile-info"><strong>Model:</strong><span>{{ product.model_name }}</span></div>
+    <div class="profile-info"><strong>Category:</strong><span>{{ product.category or '-' }}</span></div>
+    <div class="profile-info"><strong>Image URL:</strong><span>{{ product.image_url or '-' }}</span></div>
+
+    <div style="margin-top:16px;display:flex;gap:10px;">
+      <form method="POST" action="{{ url_for('admin_delete_product', product_id=product.product_id) }}" onsubmit="return confirm('Delete this product?');">
+        <button type="submit" class="btn-secondary"><i class="fa-solid fa-trash"></i> Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

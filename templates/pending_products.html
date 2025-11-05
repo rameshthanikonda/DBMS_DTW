@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Pending Products{% endblock %}
+{% block content %}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Pending Products</h1>
+    <a href="{{ url_for('admin_products') }}" class="btn-secondary btn-sm"><i class="fa-solid fa-box"></i> All Products</a>
+  </div>
+
+  <div class="table-card">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Category</th>
+          <th>Added By</th>
+          <th>Date Added</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td>{{ (page - 1) * size + loop.index }}</td>
+          <td>{{ p.brand }}</td>
+          <td>{{ p.model_name }}</td>
+          <td>{{ p.category or '-' }}</td>
+          <td>{{ p.added_by or '-' }}</td>
+          <td>{{ p.created_at or '-' }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin_verify_product', product_id=p.product_id) }}" style="display:inline">
+              <button type="submit" class="btn-primary btn-sm"><i class="fa-solid fa-check"></i> Verify</button>
+            </form>
+            <a href="{{ url_for('admin_edit_product', product_id=p.product_id) }}" class="btn-secondary btn-sm"><i class="fa-solid fa-pen"></i> Edit</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="7" class="empty-state">No pending products.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

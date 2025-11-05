@@ -4,7 +4,7 @@
 <div class="page-container">
     <div class="form-container">
         <h2 class="form-title">Edit Warranty</h2>
-        <form class="general-form" method="POST" enctype="multipart/form-data">
+        <form id="edit_warranty_form" class="general-form" method="POST" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="product_name">Product Name</label>
                 <input type="text" id="product_name" name="product_name" value="{{ item.product_name }}" required>
@@ -36,8 +36,13 @@
                 </div>
                 {% endif %}
             </div>
-            <button type="submit" class="btn-primary"><i class="fa-solid fa-save"></i> Update Warranty</button>
         </form>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:10px;">
+            <button type="submit" form="edit_warranty_form" class="btn-primary"><i class="fa-solid fa-save"></i> Update Warranty</button>
+            <form method="POST" action="{{ url_for('delete_warranty', warranty_id=item.warranty_id) }}" onsubmit="return confirm('Delete this warranty? This action cannot be undone.');" style="margin:0;">
+                <button type="submit" class="btn-secondary"><i class="fa-solid fa-trash"></i> Delete Warranty</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

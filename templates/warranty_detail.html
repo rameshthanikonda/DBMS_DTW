@@ -15,7 +15,7 @@
     <div class="profile-info"><strong>Invoice:</strong>
       <span>
         {% if warranty.invoice_path %}
-        <a class="link" target="_blank" href="{{ url_for('uploaded_file', filename=warranty.invoice_path) }}">View</a>
+        <a class="link" href="{{ url_for('uploaded_file', filename=warranty.invoice_path) }}" download>Download</a>
         {% else %}-{% endif %}
       </span>
     </div>

@@ -77,6 +77,7 @@ CREATE TABLE warranties (
     user_id NUMBER NOT NULL,
     product_name VARCHAR2(100) NOT NULL,
     brand VARCHAR2(100),
+    product_id NUMBER, -- optional FK link to products (auto-added from warranties)
     purchase_date DATE NOT NULL,
     warranty_period_months NUMBER NOT NULL,
     expiry_date DATE NOT NULL,
@@ -121,8 +122,22 @@ CREATE TABLE products (
     brand VARCHAR2(100) NOT NULL,
     model_name VARCHAR2(150) NOT NULL,
     category VARCHAR2(100), -- e.g., 'Electronics', 'Appliance'
-    image_url VARCHAR2(255)  -- Optional path to a generic product image
+    image_url VARCHAR2(255),  -- Optional path to a generic product image
+    verified CHAR(1) DEFAULT 'N' CHECK (verified IN ('Y','N')),
+    added_by NUMBER NULL, -- user who triggered auto-add
+    created_at DATE DEFAULT SYSDATE,
+    CONSTRAINT fk_products_added_by_user FOREIGN KEY (added_by) REFERENCES users(user_id)
 );
+
+-- Warranties -> Products foreign key
+ALTER TABLE warranties
+  ADD CONSTRAINT fk_warranty_product
+  FOREIGN KEY (product_id)
+  REFERENCES products(product_id);
+
+-- Normalized uniqueness on products to avoid duplicates by brand/model (case/space-insensitive)
+CREATE UNIQUE INDEX ux_products_brand_model_norm
+  ON products (LOWER(TRIM(brand)), LOWER(TRIM(model_name)));
 
 -- 6. SERVICE_CLAIMS TABLE: Tracks service/claim requests for a specific warranty
 CREATE TABLE service_claims (
